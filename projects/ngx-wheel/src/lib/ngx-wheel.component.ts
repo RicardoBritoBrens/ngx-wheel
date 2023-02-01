@@ -42,7 +42,7 @@ export class NgxWheelComponent implements OnInit, AfterViewInit {
   @Input() disableSpinOnClick: boolean;
   @Input() textOrientation: TextOrientation
   @Input() textAlignment: TextAlignment
-  
+
 
   @Output() onSpinStart: EventEmitter<any> = new EventEmitter();
   @Output() onSpinComplete: EventEmitter<any> = new EventEmitter();
@@ -55,8 +55,8 @@ export class NgxWheelComponent implements OnInit, AfterViewInit {
     this.wheel.stopAnimation(false);
     this.wheel.rotationAngle = 0;
     this.wheel.ctx.clearRect(0, 0, this.wheel.ctx.canvas.width, this.wheel.ctx.canvas.height);
-    this.isSpinning = false 
-    this.completedSpin = false 
+    this.isSpinning = false
+    this.completedSpin = false
     this.ngAfterViewInit()
   }
 
@@ -85,14 +85,15 @@ export class NgxWheelComponent implements OnInit, AfterViewInit {
       innerRadius: this.innerRadius || 0,
       outerRadius: (this.height / 2) - 20,
       centerY: (this.height / 2) + 20,
-      textOrientation : this.textOrientation,
-      textAligment : this.textAlignment,
+      textOrientation: this.textOrientation,
+      textAligment: this.textAlignment,
       animation:
       {
         type: 'spinToStop',  // Type of animation.
         duration: this.spinDuration, // How long the animation is to take in seconds.
         spins: this.spinAmount  // The number of complete 360 degree rotations the wheel is to do.
-      }
+      },
+
     })
     // @ts-ignore
     TweenMax.ticker.addEventListener("tick", this.drawPointer.bind(this));
@@ -103,7 +104,7 @@ export class NgxWheelComponent implements OnInit, AfterViewInit {
     TweenMax.ticker.removeEventListener("tick")
   }
 
-  drawPointer(){
+  drawPointer() {
     let c = this.wheel.ctx;
     // Create pointer.
     if (c) {
@@ -120,5 +121,21 @@ export class NgxWheelComponent implements OnInit, AfterViewInit {
       c.fill();
       c.restore();
     }
+  }
+
+  removeSegment() {
+    // removed; you can pass in the number of the segment to delete if desired.
+    this.wheel.deleteSegment();
+
+    // The draw method of the wheel object must be called to render the changes.
+    this.wheel.draw();
+  }
+
+  removeSegmentById(id: number) {
+    // removed; you can pass in the number of the segment to delete if desired.
+    this.wheel.deleteSegment(id);
+
+    // The draw method of the wheel object must be called to render the changes.
+    this.wheel.draw();
   }
 }

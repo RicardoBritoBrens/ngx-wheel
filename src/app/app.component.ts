@@ -13,8 +13,9 @@ export class AppComponent {
   items: any[];
   textOrientation: TextOrientation = TextOrientation.HORIZONTAL
   textAlignment: TextAlignment = TextAlignment.OUTER
+  segmentToRemove: number = 5;
 
-  ngOnInit(){
+  ngOnInit() {
     this.idToLandOn = this.seed[Math.floor(Math.random() * this.seed.length)];
     const colors = ['#FF0000', '#000000']
     this.items = this.seed.map((value) => ({
@@ -28,6 +29,7 @@ export class AppComponent {
   reset() {
     this.wheel.reset()
   }
+
   before() {
     alert('Your wheel is about to spin')
   }
@@ -39,6 +41,14 @@ export class AppComponent {
   }
 
   after() {
-    alert('You have been bamboozled')
+    alert('You have been bamboozled');
+  }
+
+  removeSegment() {
+    this.wheel.removeSegment();
+  }
+
+  removeSegmentById() {
+    this.wheel.removeSegmentById(5);
   }
 }
