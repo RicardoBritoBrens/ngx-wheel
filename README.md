@@ -19,29 +19,28 @@ $ npm install ngx-wheel --save
 ```
 
 Then inside your `index.html` file located in the `src` directory add these 2 lines to the `<head>` tag:
+
 ```html
 <script src="https://rawcdn.githack.com/zarocknz/javascript-winwheel/229a47acc3d7fd941d72a3ba9e1649751fd10ed5/Winwheel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-
 ```
 
 ## Usage
 
 Import the module
+
 ```typescript
-import { NgxWheelModule } from 'ngx-wheel'; //<-- import here
+import { NgxWheelModule } from "ngx-wheel"; //<-- import here
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    NgxWheelModule  //<-- and here
+    NgxWheelModule, //<-- and here
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 ```
 
 Once your library is imported, you can use its main component, ngx-wheel in your Angular application:
@@ -66,10 +65,10 @@ Once your library is imported, you can use its main component, ngx-wheel in your
 </ngx-wheel>
 ```
 
-
 ### Options
 
 #### Inputs
+
 - `height` is the height of the wheel canvas
 - `width` is the width of the wheel canvas
 - `spinDuration` is the number of seconds the wheel wil be spinning for
@@ -81,9 +80,16 @@ Once your library is imported, you can use its main component, ngx-wheel in your
 - `disableSpinOnClick` disabled the default behaviour of spinning the wheel on clicking it. See [this section](#spinning-with-your-own-button)
 - `idToLandOn` is the `id` value of the `item` to land on (Can be fetched from server)
 - `items` is an array of of JSON objects that represent thw wheel's segments. Check the [Full Reference](http://dougtesting.net/winwheel/refs/class_segment) for more details.
+
 #### Outputs
+
 - `onSpinStart` is called before the wheel spin
 - `onSpinComplete` is called after the wheel spin
+
+#### Available methods
+
+- `removeSegment` it allows you to remove the last segment of the wheel.
+- `removeSegmentById` it allows you to remove the segment index you speficy.
 
 ### Accessing wheel functions
 
@@ -92,6 +98,7 @@ A couple of common use cases that were frequently requested was the ability to s
 - Pass `true` to the `disableSpinOnClick` prop to disable spinning when clicking on the wheel. This is optional.
 
 - Add a ref `#wheel` to the wheel (any name works):
+
 ```xml
 <ngx-wheel
   #wheel
@@ -110,7 +117,9 @@ A couple of common use cases that were frequently requested was the ability to s
 >
 </ngx-wheel>
 ```
+
 - In your parent component ts file, refer to the wheel using `ViewChild`
+
 ```typescript
 import { ..., ViewChild, ... } from '@angular/core';
 import { NgxWheelComponent } from 'ngx-wheel';
@@ -135,6 +144,7 @@ export class ParentComponent {
 ```
 
 One thing to keep in mind when using the spin function this way. If you want to change the `idToLandOn`, you need to wait for a tick before calling the `spin` function in order for the update to propagate:
+
 ```typescript
   async spin(prize) {
     this.idToLandOn = prize
